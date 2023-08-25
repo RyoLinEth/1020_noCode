@@ -1,0 +1,27 @@
+.marquee-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.marquee-content {
+    flex: 0 0 auto;
+    display: inline-block;
+    margin-right: 100px;
+    /* 添加间隔，避免内容重叠 */
+}
+
+@keyframes marquee-animation {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+        /* 注意这里是 -50% */
+    }
+}
