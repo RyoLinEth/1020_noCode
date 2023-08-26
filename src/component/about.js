@@ -531,7 +531,6 @@ const CountdownTimer = ({ targetDate, language }) => {
     const calculateTimeLeft = () => {
         const now = new Date().getTime();
         const timeLeft = targetDate - now;
-        console.log(timeLeft)
 
         if (timeLeft < 0) {
             return {
@@ -557,7 +556,7 @@ const CountdownTimer = ({ targetDate, language }) => {
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-    useEffect(()=>{
+    useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
@@ -565,7 +564,7 @@ const CountdownTimer = ({ targetDate, language }) => {
         return () => {
             clearInterval(timer);
         };
-    },[targetDate])
+    }, [targetDate])
     const countdownBoxStyle = {
         display: 'inline-block',
         textAlign: 'center',
@@ -665,7 +664,6 @@ const StakingCard = ({
     useEffect(() => {
         if (startBlock === null || startBlock === 0) return;
         const judgeAreaOpen = () => {
-            console.log("Judging Area Open")
             const currentTimestamp = Math.floor(Date.now() / 1000)
             if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
 
@@ -1249,14 +1247,17 @@ const ProductCard = ({ product, addToCart, language }) => {
             <p style={styles.productPrice}>{price}
                 {
                     language === "EN"
-                        ? " Points" : " 積分"
+                        ? " ∞ Gem Energy Value"
+                        : " ∞ 寶石能量值"
+
                 }
             </p>
             <p style={styles.productDescription}>{description}</p>
             <button onClick={() => addToCart(product)} style={styles.addToCartButton}>
                 {
                     language === "EN"
-                        ? "Pay" : "支付"
+                        ? "Payment (Coming Soon)"
+                        : "支付（待開放）"
                 }
             </button>
         </div>
@@ -1440,15 +1441,15 @@ const Staking = ({
             const tempContract2 = new ethers.Contract(stakingCA2, StakingABI, tempSigner)
             setContract2(tempContract2);
 
-            
+
             const tempContractStartBlock = await tempContract.startBlock();
             const formattedContractStartBlock = ethers.utils.formatUnits(`${tempContractStartBlock}`, 0);
             setContractStartBlock(formattedContractStartBlock)
-            
+
             const tempLpContractStartBlock = await tempLPStakingContract.startBlock();
             const formattedLpContractStartBlock = ethers.utils.formatUnits(`${tempLpContractStartBlock}`, 0);
             setLpContractStartBlock(formattedLpContractStartBlock)
-            
+
             const tempContractStartBlock_2 = await tempContract2.startBlock();
             const formattedContractStartBlock_2 = ethers.utils.formatUnits(`${tempContractStartBlock_2}`, 0);
             setContract2StartBlock(formattedContractStartBlock_2)
@@ -1631,17 +1632,21 @@ const Shop = ({ language }) => {
     const products = [
         {
             id: 1,
-            name: language === "EN" ? 'High Quality Whitelist' : "高質量白名單",
+            name: language === "EN"
+                ? "Collaboration Whitelist Exchange Zone"
+                : "合作白名單兌換區",
             price: 0.99,
             image: 'product1.jpg',
             description:
                 language === "EN"
-                    ? 'Priority Purchase for High-Quality Collaboration Projects'
-                    : '高品質合作項目優先購買',
+                    ? "High-Quality Collaborative Research Project Whitelist"
+                    : "高品質合作投研項目白名單",
         },
         {
             id: 2,
-            name: language === "EN" ? 'Redeem 1020 Token' : "兌換 1020 代幣",
+            name: language === "EN"
+                ? "1020 Token Exchange Zone"
+                : "1020 代幣兌換區",
             price: 1.99,
             image: 'product2.jpg',
             description:
@@ -1651,33 +1656,39 @@ const Shop = ({ language }) => {
         },
         {
             id: 3,
-            name: language === "EN" ? 'Redeem NFT' : "兌換 NFT",
+            name: language === "EN"
+                ? "NFT Exchange Zone"
+                : "NFT兌換區",
             price: 2.99,
             image: 'product2.jpg',
             description:
                 language === "EN"
-                    ? "Commemorative Collectible NFT"
-                    : "紀念珍藏級NFT",
+                    ? "Limited Edition Collectible NFT"
+                    : "限量珍藏級NFT"
         },
         {
             id: 4,
-            name: language === "EN" ? 'Shareholder Meeting' : "股東大會",
+            name: language === "EN"
+                ? "1020 Venture Company Equity"
+                : "1020 風投公司股權",
             price: 3.99,
             image: 'product2.jpg',
             description:
                 language === "EN"
-                    ? "Ecological Development Research Investment Equity"
-                    : "生態建設投研股權",
+                    ? "1020 establishes an industry-leading enterprise risk management company, where community members can exchange for valuable equity, enjoying unique opportunities and resources."
+                    : "1020成立行內領先企業風控公司，社區成員可兌換價值股權，享受獨特機會及資源",
         },
         {
             id: 5,
-            name: language === "EN" ? 'Stay tuned' : "敬請期待",
-            price: 999.99,
+            name: language === "EN"
+                ? "Irregular Event Benefits"
+                : "不定期活動福利",
+            price: "unknown",
             image: 'product2.jpg',
             description:
                 language === "EN"
-                    ? "More Ecological Benefits Under Construction"
-                    : "更多生態福利建設中",
+                    ? "Irregularly held events with benefits, featuring abundant gifts and airdrops."
+                    : "不定期舉辦的活動，提供豐富的禮品和空投。",
         },
         // Add more products...
     ];
@@ -1701,8 +1712,8 @@ const Shop = ({ language }) => {
             }}>
                 {
                     language === "EN"
-                        ? "Points Shop"
-                        : "積分商城"
+                        ? "Gem Energy Point Ecosystem Center"
+                        : "寶石能量point生態中心"
                 }
 
             </h1>
