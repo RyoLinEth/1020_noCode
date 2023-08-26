@@ -325,7 +325,7 @@ const Content1 = ({ language }) => {
                                 <h1 style={{
                                     color: '#A017D7', fontWeight: 'bolder'
                                 }}>
-                                    1020 DApp
+                                    1020 DApp<br />
                                     {
                                         language === "EN"
                                             ? " Staking Center"
