@@ -1,5 +1,6 @@
 import Logo from '../img/1020/1020_Word.png'
 import Logo2 from '../img/1020/1020.jpg'
+import Logo3 from '../img/1020/1020_noBG_4.png'
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import StakingABI from '../abi/stakingABI.json'
@@ -295,10 +296,12 @@ const Content1 = ({ language }) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <img src={Logo2} alt="Logo2"
+                    <img src={Logo3} alt="Logo2"
                         style={{
                             width: '24vw',
-                            height: '21vw',
+                            minWidth: '200px',
+                            height: '24vw',
+                            minHeight: '200px',
                         }} />
                 </div>
 
@@ -1084,17 +1087,17 @@ const StakingCard = ({
                                 </button>
                                 <button style={{ marginRight: '10px' }}
                                     onClick={() => handlePercentage(50)}
-                                    >
+                                >
                                     50%
                                 </button>
                                 <button style={{ marginRight: '10px' }}
                                     onClick={() => handlePercentage(75)}
-                                    >
+                                >
                                     75%
                                 </button>
                                 <button style={{ marginRight: '10px' }}
                                     onClick={() => handlePercentage(100)}
-                                    >
+                                >
                                     Max
                                 </button>
                             </div>
