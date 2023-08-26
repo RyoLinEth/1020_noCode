@@ -322,11 +322,11 @@ const Content1 = ({ language }) => {
                                 <h1 style={{
                                     color: '#A017D7', fontWeight: 'bolder'
                                 }}>
-                                    DApp
+                                    1020 DApp
                                     {
                                         language === "EN"
-                                            ? " Staking"
-                                            : " 質押"
+                                            ? " Staking Center"
+                                            : " 質押中心"
                                     }
 
                                 </h1>
@@ -367,8 +367,8 @@ const Content1 = ({ language }) => {
                                     2.
                                     {
                                         language === "EN"
-                                            ? "Earn Point from staking 1020 LP."
-                                            : "1020LP 獲取 積分獎勵"
+                                            ? "Earn gem energy from staking 1020 LP."
+                                            : "1020LP 獲取 寶石能量值獎勵"
                                     }
                                 </p>
                             </div>
@@ -801,6 +801,11 @@ const StakingCard = ({
         zIndex: '1'
     }
 
+    const handlePercentage = (value) => {
+        const tempAmount = fatherBalance * value / 100;
+        setInputValue(`${tempAmount}`)
+    }
+
     if (defaultAccount === null) {
         return (
             <div style={{ position: 'relative' }}>
@@ -909,6 +914,22 @@ const StakingCard = ({
                                     }}
                                 />
                                 {fatherTokenName}
+                            </div>
+                            <div style={{
+                                display: 'flex', flexDirection: 'row'
+                            }}>
+                                <button>
+                                    25%
+                                </button>
+                                <button>
+                                    50%
+                                </button>
+                                <button>
+                                    75%
+                                </button>
+                                <button>
+                                    Max
+                                </button>
                             </div>
                             <div style={{
                                 display: 'flex',
@@ -1050,6 +1071,34 @@ const StakingCard = ({
                                 />
                                 {fatherTokenName}
                             </div>
+
+                            <div style={{
+                                display: 'flex', flexDirection: 'row',
+                                // justifyContent: 'space-evenly',
+                                margin: '20px',
+                            }}>
+                                <button style={{ marginRight: '10px' }}
+                                    onClick={() => handlePercentage(25)}
+                                >
+                                    25%
+                                </button>
+                                <button style={{ marginRight: '10px' }}
+                                    onClick={() => handlePercentage(50)}
+                                    >
+                                    50%
+                                </button>
+                                <button style={{ marginRight: '10px' }}
+                                    onClick={() => handlePercentage(75)}
+                                    >
+                                    75%
+                                </button>
+                                <button style={{ marginRight: '10px' }}
+                                    onClick={() => handlePercentage(100)}
+                                    >
+                                    Max
+                                </button>
+                            </div>
+                            <hr />
                             <div style={{
                                 display: 'flex',
                                 margin: '20px'
@@ -1247,7 +1296,7 @@ const ProductCard = ({ product, addToCart, language }) => {
             <p style={styles.productPrice}>{price}
                 {
                     language === "EN"
-                        ? " ∞ Gem Energy Value"
+                        ? " ∞ Gem Energy"
                         : " ∞ 寶石能量值"
 
                 }
