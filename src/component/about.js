@@ -1437,7 +1437,7 @@ const Staking = ({
 
     const handleIsTxOnChain = async (value) => {
         console.log("New Transaction On Chain, Reload Data")
-        await updateEthers();
+        await updateData();
     }
 
     const tryGetUserById = async (tempUserId, tempContract, setClaimed, decimal) => {
@@ -1451,6 +1451,42 @@ const Staking = ({
         } catch (err) {
             setClaimed(0)
         }
+    }
+
+    const updateData = async () => {
+        const tempBalanceJNY = await jnyContract.balanceOf(defaultAccount);
+        const formattedBalance = ethers.utils.formatUnits(`${tempBalanceJNY}`, jnyDecimals);
+        setJNYBalance(parseAndTruncate(formattedBalance, 2));
+
+        const tempStakedJNY = await contract.getUserTotalAmount(defaultAccount);
+        const formattedStakedBalance = ethers.utils.formatUnits(`${tempStakedJNY}`, jnyDecimals);
+        setJNYStaked(parseAndTruncate(formattedStakedBalance, 2));
+
+        const tempGained1020 = await contract.pendingReward(defaultAccount);
+        const formattedGained1020 = ethers.utils.formatUnits(`${tempGained1020}`, _1020deicmals);
+        setEarned1020(parseAndTruncate(formattedGained1020, 5));
+
+        
+        const tempStakedJNY_2 = await contract2.getUserTotalAmount(defaultAccount);
+        const formattedStakedBalance_2 = ethers.utils.formatUnits(`${tempStakedJNY_2}`, jnyDecimals);
+        setContract2Staked(parseAndTruncate(formattedStakedBalance_2, 2));
+
+        const tempGained1020_2 = await contract2.pendingReward(defaultAccount);
+        const formattedGained1020_2 = ethers.utils.formatUnits(`${tempGained1020_2}`, _1020deicmals);
+        setContract2Earned1020(parseAndTruncate(formattedGained1020_2, 5));
+
+        const temp1020LPBalance = await _1020LPContract.balanceOf(defaultAccount);
+        const formatted1020LPBalance = ethers.utils.formatUnits(`${temp1020LPBalance}`, _1020LPDecimals);
+        set1020LPBalance(parseAndTruncate(formatted1020LPBalance, 9))
+
+        const tempStaked1020LP = await lpStakingContract.getUserTotalAmount(defaultAccount);
+        const formattedStaked1020LPBalance = ethers.utils.formatUnits(`${tempStaked1020LP}`, _1020LPDecimals);
+        set1020LPStaked(parseAndTruncate(formattedStaked1020LPBalance, 9));
+
+        //  可提領的 Point
+        const tempGainedPoint = await lpStakingContract.pendingReward(defaultAccount);
+        const formattedGainedPoint = ethers.utils.formatUnits(`${tempGainedPoint}`, pointDeicmals);
+        setEarnedPoint(parseAndTruncate(formattedGainedPoint, 9));
     }
 
     const updateEthers = async () => {
