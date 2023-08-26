@@ -521,153 +521,17 @@ const Content2 = ({ language, _1020CA }) => {
                         </button>
                     </a>
                 </div>
-                {/* <div className="elementor-element elementor-element-33e5fbe2 elementor-widget elementor-widget-heading" data-id="33e5fbe2" data-element_type="widget" data-widget_type="heading.default"
-                    style={{
-                        display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
-                    }}>
-                    <h3 style={{
-                        color: '#A017D7', fontWeight: 'bolder',
-                        wordBreak: 'break-all',
-                        padding: '20px',
-                    }}>
-                        JNY
-                        {
-                            language === "EN"
-                                ? " CA : "
-                                : " 合約 : "
-                        }
-                        <br />
-                        <p style={{
-                            paddingLeft: '20px',
-                            color: 'gray'
-                        }}>
-                            <br />
-                            {JNYCA}
-                        </p>
-                    </h3>
-
-                    <a
-                        href={JNYLink}
-                        style={{
-                            fontWeight: 'bolder',
-                            color: 'rgb(83,0,117)'
-                        }}>
-
-                        <button className='box' style={{
-                            width: '15vw',
-                            height: '10vh',
-                            minWidth: '280px',
-                            minHeight: '50px',
-                            borderRadius: '20px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            margin: '20px',
-                        }}>
-                            {
-                                language === "EN"
-                                    ? "Buy 1020 On PancakeSwap"
-                                    : "在 PancakeSwap 購買 1020"
-                            }
-                        </button>
-                    </a>
-                </div> */}
-                {/* <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    <div className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-5d9ad543" data-id="5d9ad543" data-element_type="column"
-                        style={{
-                            display: 'flex', paddingLeft: '20px'
-                        }}>
-                        <div>
-                            <div style={{ padding: '10px' }}>
-                                <div className="elementor-widget-container"
-                                >
-                                    <h4 style={{
-                                        color: '#A017D7', fontWeight: 'bolder'
-                                    }}>
-                                        代幣機制</h4>
-                                    <div style={{
-                                        paddingLeft: '20px'
-                                    }}>
-                                        <span style={{
-                                            color: 'gray',
-                                        }}>
-                                            買入稅率 : 5% <br />
-                                            賣出稅率 : 5% <br />
-                                            稅率分配 :
-                                            <ul>
-                                                <li>LP分紅 2%</li>
-                                                <li>營銷 2% </li>
-                                                <li>1% 銷毀 直到 總量縮減為 1020</li>
-                                            </ul>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="elementor-column elementor-col-50 elementor-top-column"
-                        style={{
-                            display: 'flex', paddingLeft: '20px'
-                        }}>
-                        <div>
-                            <div style={{ padding: '10px' }}>
-                                <div className="elementor-widget-container"
-                                >
-                                    <h4 style={{
-                                        color: '#A017D7', fontWeight: 'bolder'
-                                    }}>
-                                        Token Parameter</h4>
-                                    <div className="elementor-container elementor-column-gap-no"
-                                        style={{
-                                            display: 'flex', flexDirection: 'column'
-                                        }}>
-                                        <div>
-                                            <div>
-                                                <div>
-                                                    <div style={{
-                                                        paddingLeft: '20px'
-                                                    }}>
-                                                        <ul className="elementor-icon-list-items" style={{
-                                                            listStyle: 'none',
-                                                        }}>
-                                                            {
-                                                                LeftColumn.map((content, index) => {
-                                                                    return (
-                                                                        <li className="elementor-icon-list-item" key={content}>
-                                                                            <span className="elementor-icon-list-icon" style={{ color: 'orange' }}>
-                                                                                <i aria-hidden="true" className="fas fa-circle" />
-                                                                            </span>
-                                                                            <span className="elementor-icon-list-text" style={{
-                                                                                color: 'gray', fontWeight: 'bolder',
-                                                                                padding: '10px',
-                                                                            }}>{content}</span>
-                                                                        </li>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </div>
         </section>
     )
 }
 
 const CountdownTimer = ({ targetDate, language }) => {
-    const timeUnknown = true;
+    const timeUnknown = false;
     const calculateTimeLeft = () => {
         const now = new Date().getTime();
-        const targetTime = new Date(targetDate).getTime();
-        const timeLeft = targetTime - now;
+        const timeLeft = targetDate - now;
+        console.log(timeLeft)
 
         if (timeLeft < 0) {
             return {
@@ -693,7 +557,7 @@ const CountdownTimer = ({ targetDate, language }) => {
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-    useEffect(() => {
+    useEffect(()=>{
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
@@ -701,7 +565,7 @@ const CountdownTimer = ({ targetDate, language }) => {
         return () => {
             clearInterval(timer);
         };
-    }, []);
+    },[targetDate])
     const countdownBoxStyle = {
         display: 'inline-block',
         textAlign: 'center',
@@ -786,7 +650,6 @@ const StakingCard = ({
     sonGained,
     provider,
     isSuccess,
-    isAreaOpen,
     Phase,
     startBlock,
     bonusEndBlock,
@@ -794,16 +657,30 @@ const StakingCard = ({
 }) => {
 
     const [inputValue, setInputValue] = useState(''); // 初始化狀態為空字符串
-
+    const [isAreaOpenJudge, setIsAreaOpenJudge] = useState(false);
     const handleInputChange = (event) => {
         setInputValue(event.target.value); // 更新狀態為輸入的值
     };
+
+    useEffect(() => {
+        if (startBlock === null || startBlock === 0) return;
+        const judgeAreaOpen = () => {
+            console.log("Judging Area Open")
+            const currentTimestamp = Math.floor(Date.now() / 1000)
+            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
+
+            else setIsAreaOpenJudge(true)
+        }
+        judgeAreaOpen();
+    }, [defaultAccount, startBlock])
+
 
     const placeHolderText = language === "EN" ? "Amount to Stake" : "質押數量";
 
     const defaultInviter = "0x0000000000000000000000000000000000000000"
 
     const handleWithdraw = async () => {
+        if (isAreaOpenJudge === false) return;
         const realFatherStaked = ethers.utils.parseUnits(fatherStaked, fatherDecimals)
         try {
             const result = await contract.withdraw(realFatherStaked);
@@ -823,6 +700,7 @@ const StakingCard = ({
     }
 
     const handleClaim = async () => {
+        if (isAreaOpenJudge === false) return;
         try {
             const result = await contract.withdraw(0);
             provider
@@ -842,6 +720,7 @@ const StakingCard = ({
     const approveAndSendTx = async () => {
         if (defaultAccount === null) return;
         if (inputValue === "" || inputValue === null) return;
+        if (isAreaOpenJudge === false) return;
 
         const amount = ethers.utils.parseUnits(inputValue, fatherDecimals);
         try {
@@ -916,104 +795,15 @@ const StakingCard = ({
             console.log(err)
         }
     }
-    if (isAreaOpen)
-        return (
-            <div style={{
-                padding: '20px', minWidth: '360px', width: '45vw',
-                margin: '10px',
-                color: 'purple',
-                backgroundColor: 'white',
-                borderRadius: '20px'
-            }}>
-                <div>
-                    <h3 style={{ textAlign: 'center' }}>
-                        {
-                            language === "EN"
-                                ? `Phase ${Phase}`
-                                : `第 ${Phase} 期`
-                        }
-                    </h3>
-                    <h4 style={{ textAlign: 'center' }}>
 
-                        {
-                            language === "EN"
-                                ? " Stake "
-                                : " 質押 "
-                        }
-                        {fatherTokenName}
 
-                        {
-                            language === "EN"
-                                ? " to Earn "
-                                : " 賺取 "
-                        } {sonTokenName}
-                    </h4>
-                    <TableComponent
-                        fatherTokenName={fatherTokenName}
-                        sonTokenName={sonTokenName}
-                        language={language}
-                        fatherHolding={fatherBalance}
-                        fatherStaked={fatherStaked}
-                        sonGained={sonGained}
-                        startBlock={startBlock}
-                        bonusEndBlock={bonusEndBlock}
-                        hasBeenClaimdReward={hasBeenClaimdReward}
-                    />
-                    <div style={{
-                        display: 'flex',
-                        margin: '20px',
-                        alignItems: 'center'
-                    }}>
-                        <button onClick={approveAndSendTx}>
-                            {
-                                language === "EN"
-                                    ? " Stake"
-                                    : " 質押"
-                            }
-                        </button>
-                        <input
-                            placeholder={placeHolderText}
-                            type="number"
-                            value={inputValue}
-                            onChange={handleInputChange}
-                            style={{
-                                marginLeft: '20px',
-                                marginRight: '20px',
-                                minWidth: '150px',
-                                fontSize: '10px'
-                            }}
-                        />
-                        {fatherTokenName}
-                    </div>
-                    <div style={{
-                        display: 'flex',
-                        margin: '20px'
-                    }}>
-                        <button onClick={handleClaim}>
-                            {
-                                language === "EN"
-                                    ? "Claim "
-                                    : "領取 "
-                            }
-                            {sonTokenName}
-                        </button>
-                    </div>
-                    <div style={{
-                        display: 'flex',
-                        margin: '20px'
-                    }}>
-                        <button onClick={handleWithdraw}>
-                            {
-                                language === "EN"
-                                    ? " Unstake"
-                                    : " 解除質押"
-                            } {fatherTokenName}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        )
-    else
+    const areaNotOpenStyle = {
+        filter: 'blur(10px)',
+        position: 'relative',
+        zIndex: '1'
+    }
+
+    if (defaultAccount === null) {
         return (
             <div style={{ position: 'relative' }}>
                 <span style={{
@@ -1028,7 +818,11 @@ const StakingCard = ({
                     <div style={{
                         color: 'gray'
                     }}>
-                        <CountdownTimer targetDate={"2023-08-28T23:59:59"} language={language} />
+                        {
+                            language === "EN"
+                                ? " Please Connect Your Wallet "
+                                : " 請連接錢包 "
+                        }
                     </div>
                     <br />
                     <h4 style={{ textAlign: 'center' }}>
@@ -1148,6 +942,147 @@ const StakingCard = ({
                 </div>
             </div>
         )
+    } else {
+        return (
+
+            <div style={{ position: 'relative' }}>
+                {
+                    isAreaOpenJudge
+                        ? null
+                        :
+                        <span style={{
+                            position: 'absolute',
+                            marginLeft: '15vw',
+                            marginTop: '10vh',
+                            zIndex: '100',
+                            fontSize: '30px',
+                            fontWeight: 'bolder',
+                        }}>
+
+                            <div style={{
+                                color: 'gray'
+                            }}>
+                                <CountdownTimer targetDate={startBlock * 1000} language={language} />
+                            </div>
+                            <br />
+                            <h4 style={{
+                                textAlign: 'center',
+                                color: 'blueviolet',
+                            }}>
+
+                                {
+                                    language === "EN"
+                                        ? " Stake "
+                                        : " 質押 "
+                                }
+                                {fatherTokenName}
+
+                                {
+                                    language === "EN"
+                                        ? " to Earn "
+                                        : " 賺取 "
+                                } {sonTokenName}
+                            </h4>
+                        </span>
+                }
+                <div style={isAreaOpenJudge ? null : areaNotOpenStyle}>
+                    <div style={{
+                        padding: '20px', minWidth: '360px', width: '45vw',
+                        margin: '10px',
+                        color: 'purple',
+                        backgroundColor: 'white',
+                        borderRadius: '20px'
+                    }}>
+                        <h3 style={{ textAlign: 'center' }}>
+                            {
+                                language === "EN"
+                                    ? `Phase ${Phase}`
+                                    : `第 ${Phase} 期`
+                            }
+                        </h3>
+                        <div>
+                            <h4 style={{ textAlign: 'center' }}>
+
+                                {
+                                    language === "EN"
+                                        ? " Stake "
+                                        : " 質押 "
+                                }
+                                {fatherTokenName}
+
+                                {
+                                    language === "EN"
+                                        ? " to Earn "
+                                        : " 賺取 "
+                                } {sonTokenName}
+                            </h4>
+                            <TableComponent
+                                fatherTokenName={fatherTokenName}
+                                sonTokenName={sonTokenName}
+                                language={language}
+                                fatherHolding={fatherBalance}
+                                fatherStaked={fatherStaked}
+                                sonGained={sonGained}
+                                startBlock={startBlock}
+                                bonusEndBlock={bonusEndBlock}
+                                hasBeenClaimdReward={hasBeenClaimdReward}
+                            />
+                            <div style={{
+                                display: 'flex',
+                                margin: '20px',
+                                alignItems: 'center'
+                            }}>
+                                <button onClick={approveAndSendTx}>
+                                    {
+                                        language === "EN"
+                                            ? " Stake"
+                                            : " 質押"
+                                    }
+                                </button>
+                                <input
+                                    placeholder={placeHolderText}
+                                    type="number"
+                                    value={inputValue}
+                                    onChange={handleInputChange}
+                                    style={{
+                                        marginLeft: '20px',
+                                        marginRight: '20px',
+                                        width: '100px'
+                                    }}
+                                />
+                                {fatherTokenName}
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                margin: '20px'
+                            }}>
+                                <button onClick={handleClaim}>
+                                    {
+                                        language === "EN"
+                                            ? "Claim "
+                                            : "領取 "
+                                    }
+                                    {sonTokenName}
+                                </button>
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                margin: '20px'
+                            }}>
+                                <button onClick={handleWithdraw}>
+                                    {
+                                        language === "EN"
+                                            ? " Unstake"
+                                            : " 解除質押"
+                                    } {fatherTokenName}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 const TableComponent = ({
@@ -1466,7 +1401,7 @@ const Staking = ({
         const formattedGained1020 = ethers.utils.formatUnits(`${tempGained1020}`, _1020deicmals);
         setEarned1020(parseAndTruncate(formattedGained1020, 5));
 
-        
+
         const tempStakedJNY_2 = await contract2.getUserTotalAmount(defaultAccount);
         const formattedStakedBalance_2 = ethers.utils.formatUnits(`${tempStakedJNY_2}`, jnyDecimals);
         setContract2Staked(parseAndTruncate(formattedStakedBalance_2, 2));
@@ -1502,7 +1437,21 @@ const Staking = ({
             setContract(tempContract);
             const tempLPStakingContract = new ethers.Contract(LPStakingCA, StakingABI, tempSigner)
             setLpStakingContract(tempLPStakingContract);
+            const tempContract2 = new ethers.Contract(stakingCA2, StakingABI, tempSigner)
+            setContract2(tempContract2);
 
+            
+            const tempContractStartBlock = await tempContract.startBlock();
+            const formattedContractStartBlock = ethers.utils.formatUnits(`${tempContractStartBlock}`, 0);
+            setContractStartBlock(formattedContractStartBlock)
+            
+            const tempLpContractStartBlock = await tempLPStakingContract.startBlock();
+            const formattedLpContractStartBlock = ethers.utils.formatUnits(`${tempLpContractStartBlock}`, 0);
+            setLpContractStartBlock(formattedLpContractStartBlock)
+            
+            const tempContractStartBlock_2 = await tempContract2.startBlock();
+            const formattedContractStartBlock_2 = ethers.utils.formatUnits(`${tempContractStartBlock_2}`, 0);
+            setContract2StartBlock(formattedContractStartBlock_2)
             //  代幣資料
             const tempJNYContract = new ethers.Contract(JNYCA, TokenABI, tempSigner)
             setJNYContract(tempJNYContract);
@@ -1557,22 +1506,18 @@ const Staking = ({
             const formattedGainedPoint = ethers.utils.formatUnits(`${tempGainedPoint}`, tempDecimalPoint);
             setEarnedPoint(parseAndTruncate(formattedGainedPoint, 9));
 
-            //  質押合約 開始結束時間
-            const tempContractStartBlock = await tempContract.startBlock();
-            const formattedContractStartBlock = ethers.utils.formatUnits(`${tempContractStartBlock}`, 0);
-            setContractStartBlock(formattedContractStartBlock)
-
+            //  質押合約 結束時間
             const tempContractEndBlock = await tempContract.bonusEndBlock();
             const formattedContractEndBlock = ethers.utils.formatUnits(`${tempContractEndBlock}`, 0);
             setContractEndBlock(formattedContractEndBlock)
 
-            const tempLpContractStartBlock = await tempLPStakingContract.startBlock();
-            const formattedLpContractStartBlock = ethers.utils.formatUnits(`${tempLpContractStartBlock}`, 0);
-            setLpContractStartBlock(formattedLpContractStartBlock)
-
             const tempLpContractEndBlock = await tempLPStakingContract.bonusEndBlock();
             const formattedLpContractEndBlock = ethers.utils.formatUnits(`${tempLpContractEndBlock}`, 0);
             setLpContractEndBlock(formattedLpContractEndBlock)
+
+            const tempContractEndBlock_2 = await tempContract2.bonusEndBlock();
+            const formattedContractEndBlock_2 = ethers.utils.formatUnits(`${tempContractEndBlock_2}`, 0);
+            setContract2EndBlock(formattedContractEndBlock_2)
 
             //  已領取的 1020 數量
             const tempUserId = await tempContract._usersId(defaultAccount)
@@ -1581,9 +1526,6 @@ const Staking = ({
             //  已領取的 Point 數量
             const tempLpStakingUserId = await tempLPStakingContract._usersId(defaultAccount)
             tryGetUserById(tempLpStakingUserId, tempLPStakingContract, setPointHasBeenClaimedReward, tempDecimalPoint);
-
-            const tempContract2 = new ethers.Contract(stakingCA2, StakingABI, tempSigner)
-            setContract2(tempContract2);
 
             const tempStakedJNY2 = await tempContract2.getUserTotalAmount(defaultAccount);
             const formattedStakedBalance2 = ethers.utils.formatUnits(`${tempStakedJNY2}`, tempDecimalJNY);
@@ -1595,14 +1537,6 @@ const Staking = ({
 
             const tempUserId_2 = await tempContract2._usersId(defaultAccount)
             tryGetUserById(tempUserId_2, tempContract2, setContract2Claimed1020, tempDecimal1020);
-
-            const tempContractStartBlock_2 = await tempContract2.startBlock();
-            const formattedContractStartBlock_2 = ethers.utils.formatUnits(`${tempContractStartBlock_2}`, 0);
-            setContract2StartBlock(formattedContractStartBlock_2)
-
-            const tempContractEndBlock_2 = await tempContract2.bonusEndBlock();
-            const formattedContractEndBlock_2 = ethers.utils.formatUnits(`${tempContractEndBlock_2}`, 0);
-            setContract2EndBlock(formattedContractEndBlock_2)
         } catch (err) {
             console.log(err)
         }
@@ -1656,8 +1590,8 @@ const Staking = ({
                 fatherStaked={contract2Staked}
                 sonGained={contract2Earned1020}
                 isSuccess={handleIsTxOnChain}
-                isAreaOpen={true}
-                Phase={2}
+                isAreaOpen={false}
+                Phase={1.5}
                 startBlock={contract2StartBlock}
                 bonusEndBlock={contract2EndBlock}
                 hasBeenClaimdReward={contract2Claimed1020}
@@ -1675,8 +1609,8 @@ const Staking = ({
                 fatherStaked={_1020LPStaked}
                 sonGained={earnedPoint}
                 isSuccess={handleIsTxOnChain}
-                isAreaOpen={true}
-                Phase={3}
+                isAreaOpen={false}
+                Phase={2}
                 startBlock={lpContractStartBlock}
                 bonusEndBlock={lpContractEndBlock}
                 hasBeenClaimdReward={pointHasBeenClaimedReward}
@@ -1811,8 +1745,8 @@ const About = () => {
     }
 
     const CAs = {
-        stakingCA: '0xc70D391ee54bE502154d0d48Be2674eafe7f7CB7',
-        //0x410e2968f2CDC049ed5E2622Ed8CE9a3064CD9Fe
+        // stakingCA: '0xc70D391ee54bE502154d0d48Be2674eafe7f7CB7',     //Formal
+        stakingCA: '0x410e2968f2CDC049ed5E2622Ed8CE9a3064CD9Fe',        //Test
         stakingCA2: '0x9E0D2393068921a8C46469A1d9F0504F2DFCbcf8',
         JNYCA: '0x1E83D06E17CAE34415BeA30116aC755456131020',
         _1020CA: '0x606261Dd5C435f4628bb557EC8CF3b5a0B131020',
