@@ -839,7 +839,6 @@ const StakingCard = ({
                                 : " 質押 "
                         }
                         {fatherTokenName}
-
                         {
                             language === "EN"
                                 ? " to Earn "
@@ -1600,6 +1599,8 @@ const Staking = ({
         updateEthers();
     }, [defaultAccount])
 
+    const stakingContract3SonTokenName = language === "EN" ? "Gem Energy" : "寶石能量值"
+
     return (
         <section id="Staking"
             style={{
@@ -1651,7 +1652,7 @@ const Staking = ({
             />
             <StakingCard
                 fatherTokenName={"1020LP"}
-                sonTokenName={"Point"}
+                sonTokenName={stakingContract3SonTokenName}
                 language={language}
                 contract={lpStakingContract}
                 defaultAccount={defaultAccount}
