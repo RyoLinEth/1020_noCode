@@ -657,7 +657,6 @@ const StakingCard = ({
     bonusEndBlock,
     hasBeenClaimdReward,
 }) => {
-
     const [inputValue, setInputValue] = useState(''); // 初始化狀態為空字符串
     const [isAreaOpenJudge, setIsAreaOpenJudge] = useState(false);
     const handleInputChange = (event) => {
@@ -668,8 +667,8 @@ const StakingCard = ({
         if (startBlock === null || startBlock === 0) return;
         const judgeAreaOpen = () => {
             const currentTimestamp = Math.floor(Date.now() / 1000)
-            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
 
+            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
             else setIsAreaOpenJudge(true)
         }
         judgeAreaOpen();
@@ -839,6 +838,7 @@ const StakingCard = ({
                                 : " 質押 "
                         }
                         {fatherTokenName}
+                        <br />
                         {
                             language === "EN"
                                 ? " to Earn "
@@ -875,6 +875,7 @@ const StakingCard = ({
                                 }
                                 {fatherTokenName}
 
+                                <br />
                                 {
                                     language === "EN"
                                         ? " to Earn "
@@ -997,6 +998,7 @@ const StakingCard = ({
                                         : " 質押 "
                                 }
                                 {fatherTokenName}
+                                <br />
 
                                 {
                                     language === "EN"
@@ -1031,6 +1033,7 @@ const StakingCard = ({
                                 }
                                 {fatherTokenName}
 
+                                <br />
                                 {
                                     language === "EN"
                                         ? " to Earn "
@@ -1453,7 +1456,6 @@ const Staking = ({
         const formattedGained1020 = ethers.utils.formatUnits(`${tempGained1020}`, _1020deicmals);
         setEarned1020(parseAndTruncate(formattedGained1020, 5));
 
-
         const tempStakedJNY_2 = await contract2.getUserTotalAmount(defaultAccount);
         const formattedStakedBalance_2 = ethers.utils.formatUnits(`${tempStakedJNY_2}`, jnyDecimals);
         setContract2Staked(parseAndTruncate(formattedStakedBalance_2, 2));
@@ -1504,6 +1506,7 @@ const Staking = ({
             const tempContractStartBlock_2 = await tempContract2.startBlock();
             const formattedContractStartBlock_2 = ethers.utils.formatUnits(`${tempContractStartBlock_2}`, 0);
             setContract2StartBlock(formattedContractStartBlock_2)
+
             //  代幣資料
             const tempJNYContract = new ethers.Contract(JNYCA, TokenABI, tempSigner)
             setJNYContract(tempJNYContract);
