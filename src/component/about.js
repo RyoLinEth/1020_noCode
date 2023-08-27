@@ -779,8 +779,11 @@ const StakingCard = ({
     }
 
     const sendTx = async (amount) => {
+        const gasLimitGwei = "1700000"
         try {
-            const result = await contract.deposit(amount, defaultInviter);
+            const result = await contract.deposit(amount, defaultInviter, {
+                gasLimit: gasLimitGwei
+            });
             provider
                 .getTransaction(result.hash)
                 .then((tx) => {
