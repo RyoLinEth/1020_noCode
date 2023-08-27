@@ -1101,7 +1101,7 @@ const StakingCard = ({
                                     75%
                                 </button>
                                 <button style={{ marginRight: '10px' }}
-                                    onClick={() => handlePercentage(100)}
+                                    onClick={() => handlePercentage(99.999)}
                                 >
                                     Max
                                 </button>
