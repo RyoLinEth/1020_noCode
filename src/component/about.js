@@ -1809,8 +1809,8 @@ const About = () => {
     }
 
     const CAs = {
-        // stakingCA: '0xc70D391ee54bE502154d0d48Be2674eafe7f7CB7',     //Formal
-        stakingCA: '0x410e2968f2CDC049ed5E2622Ed8CE9a3064CD9Fe',        //Test
+        stakingCA: '0xc70D391ee54bE502154d0d48Be2674eafe7f7CB7',     //Formal
+        // stakingCA: '0x410e2968f2CDC049ed5E2622Ed8CE9a3064CD9Fe',        //Test
         stakingCA2: '0x9E0D2393068921a8C46469A1d9F0504F2DFCbcf8',
         JNYCA: '0x1E83D06E17CAE34415BeA30116aC755456131020',
         _1020CA: '0x606261Dd5C435f4628bb557EC8CF3b5a0B131020',
@@ -1818,12 +1818,6 @@ const About = () => {
         lpStakingCA: '0x25dA6086b943393b79746869832414d32Ef5aDe4',
         _1020LPCA: '0x42B9E132569Cb3FA1B3af0a52D5Cac5d98A9eC44',
         PointCA: '0x1c65D4A15e943f4fd2DaE158D8c3E9fD0f7EbfE0'
-        // stakingCA: '0xF96407a0ecd34E36345Ee43a35a48AC4C2Fe5Ea7',
-        // lpStakingCA: '0xF96407a0ecd34E36345Ee43a35a48AC4C2Fe5Ea7',
-        // JNYCA: '0x2BDF6DDbfEc9781aAbee00D7e028D3efcCaD473d',
-        // _1020CA: '0x9fb6CbC7e1651237Bc1BD22c2F96BDa6D762673a',
-        // _1020LPCA: '0x9fb6CbC7e1651237Bc1BD22c2F96BDa6D762673a',
-        // PointCA: '0x9fb6CbC7e1651237Bc1BD22c2F96BDa6D762673a'
     }
 
     const stakingCenterText = language === "EN" ? "Staking Center" : "質押中心";
