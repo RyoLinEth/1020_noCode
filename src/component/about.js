@@ -1639,25 +1639,6 @@ const Staking = ({
                 hasBeenClaimdReward={hasBeenClaimdReward}
             />
             <StakingCard
-                fatherTokenName={"JNY"}
-                sonTokenName={"1020"}
-                language={language}
-                contract={contract2}
-                defaultAccount={defaultAccount}
-                fatherContract={jnyContract}
-                provider={provider}
-                fatherDecimals={jnyDecimals}
-                fatherBalance={jnyBalance}
-                fatherStaked={contract2Staked}
-                sonGained={contract2Earned1020}
-                isSuccess={handleIsTxOnChain}
-                isAreaOpen={false}
-                Phase={1.5}
-                startBlock={contract2StartBlock}
-                bonusEndBlock={contract2EndBlock}
-                hasBeenClaimdReward={contract2Claimed1020}
-            />
-            <StakingCard
                 fatherTokenName={"1020LP"}
                 sonTokenName={stakingContract3SonTokenName}
                 language={language}
@@ -1675,6 +1656,25 @@ const Staking = ({
                 startBlock={lpContractStartBlock}
                 bonusEndBlock={lpContractEndBlock}
                 hasBeenClaimdReward={pointHasBeenClaimedReward}
+            />
+            <StakingCard
+                fatherTokenName={"JNY"}
+                sonTokenName={"1020"}
+                language={language}
+                contract={contract2}
+                defaultAccount={defaultAccount}
+                fatherContract={jnyContract}
+                provider={provider}
+                fatherDecimals={jnyDecimals}
+                fatherBalance={jnyBalance}
+                fatherStaked={contract2Staked}
+                sonGained={contract2Earned1020}
+                isSuccess={handleIsTxOnChain}
+                isAreaOpen={false}
+                Phase={3}
+                startBlock={contract2StartBlock}
+                bonusEndBlock={contract2EndBlock}
+                hasBeenClaimdReward={contract2Claimed1020}
             />
         </section>
     )
