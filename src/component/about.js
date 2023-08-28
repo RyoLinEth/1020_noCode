@@ -1423,10 +1423,10 @@ const Staking = ({
     const PointCA = pointCA
 
     const parseAndTruncate = (amount, afterDeciaml) => {
-        const parsedAmount = parseFloat(amount);
-        const truncatedAmount = parsedAmount.toFixed(afterDeciaml);
+        const multiplier = Math.pow(10, afterDeciaml);
+        const truncatedAmount = Math.floor(amount * multiplier) / multiplier;
         return truncatedAmount;
-    }
+    };
 
     const handleIsTxOnChain = async (value) => {
         console.log("New Transaction On Chain, Reload Data")
