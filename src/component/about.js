@@ -6,6 +6,7 @@ import { ethers } from 'ethers';
 import StakingABI from '../abi/stakingABI.json'
 import TokenABI from '../abi/IERC20ABI.json'
 import '../css/About.css'
+import swal from 'sweetalert'
 
 
 const NumberCounter = ({ targetNumber }) => {
@@ -695,7 +696,7 @@ const StakingCard = ({
                     })
                 })
         } catch (err) {
-            console.log(err)
+            swal("error", `${err}`, "error")
         }
     }
 
