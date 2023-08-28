@@ -682,7 +682,7 @@ const StakingCard = ({
 
     const handleWithdraw = async () => {
         if (isAreaOpenJudge === false) return;
-        const realFatherStaked = ethers.utils.parseUnits(fatherStaked, fatherDecimals)
+        const realFatherStaked = ethers.utils.parseUnits(`${fatherStaked}`, fatherDecimals)
         try {
             const result = await contract.withdraw(realFatherStaked);
             provider
