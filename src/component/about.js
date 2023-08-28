@@ -1517,7 +1517,7 @@ const Staking = ({
             const temp1020Contract = new ethers.Contract(CA_1020, TokenABI, tempSigner)
             set1020Contract(tempJNYContract);
             const temp1020LPContract = new ethers.Contract(LP_1020, TokenABI, tempSigner)
-            set1020LPContract(tempJNYContract);
+            set1020LPContract(temp1020LPContract);
             const tempPointContract = new ethers.Contract(PointCA, TokenABI, tempSigner)
             setPointContract(tempPointContract);
 
