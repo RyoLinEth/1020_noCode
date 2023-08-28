@@ -696,7 +696,7 @@ const StakingCard = ({
                     })
                 })
         } catch (err) {
-            swal("error", `${err}`, "error")
+            console.log(err)
         }
     }
 
@@ -1540,7 +1540,9 @@ const Staking = ({
 
             //  質押JNY
             const tempStakedJNY = await tempContract.getUserTotalAmount(defaultAccount);
+            console.log(tempStakedJNY, tempDecimalJNY)
             const formattedStakedBalance = ethers.utils.formatUnits(`${tempStakedJNY}`, tempDecimalJNY);
+            console.log(formattedStakedBalance)
             setJNYStaked(parseAndTruncate(formattedStakedBalance, 2));
 
             //  可提領的1020
