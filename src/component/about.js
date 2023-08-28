@@ -1551,7 +1551,7 @@ const Staking = ({
             //  質押 1020LP 獲得 Points 資料
 
             //  持有 1020LP
-            const temp1020LPBalance = await temp1020Contract.balanceOf(defaultAccount);
+            const temp1020LPBalance = await temp1020LPContract.balanceOf(defaultAccount);
             const formatted1020LPBalance = ethers.utils.formatUnits(`${temp1020LPBalance}`, tempDecimal1020LP);
             set1020LPBalance(parseAndTruncate(formatted1020LPBalance, 9))
 
