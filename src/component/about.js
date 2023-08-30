@@ -683,6 +683,7 @@ const StakingCard = ({
     const handleWithdraw = async () => {
         if (isAreaOpenJudge === false) return;
         const realFatherStaked = ethers.utils.parseUnits(`${fatherStaked}`, fatherDecimals)
+        console.log(realFatherStaked);
         try {
             const result = await contract.withdraw(realFatherStaked);
             provider
@@ -696,7 +697,7 @@ const StakingCard = ({
                     })
                 })
         } catch (err) {
-            console.log(err)
+            swal("error",`${err.reason}`,"error")
         }
     }
 
@@ -1551,6 +1552,7 @@ const Staking = ({
             //  質押 1020LP 獲得 Points 資料
 
             //  持有 1020LP
+            // const testAddresss = "0x04322E3b3EE8ae0Ae85f6336Dc2D8f44A4567866";
             const temp1020LPBalance = await temp1020LPContract.balanceOf(defaultAccount);
             const formatted1020LPBalance = ethers.utils.formatUnits(`${temp1020LPBalance}`, tempDecimal1020LP);
             set1020LPBalance(parseAndTruncate(formatted1020LPBalance, 9))
