@@ -683,7 +683,6 @@ const StakingCard = ({
     const handleWithdraw = async () => {
         if (isAreaOpenJudge === false) return;
         const realFatherStaked = ethers.utils.parseUnits(`${fatherStaked}`, fatherDecimals)
-        console.log(realFatherStaked);
         try {
             const result = await contract.withdraw(realFatherStaked);
             provider
@@ -1424,11 +1423,24 @@ const Staking = ({
     const LP_1020 = _1020LPCA
     const PointCA = pointCA
 
-    const parseAndTruncate = (amount, afterDeciaml) => {
-        const multiplier = Math.pow(10, afterDeciaml);
-        const truncatedAmount = Math.floor(amount * multiplier) / multiplier;
-        return truncatedAmount;
+    const parseAndTruncate = (amount, afterDecimal) => {
+        const parts = String(amount).split('.');
+        if (parts.length === 1 || afterDecimal <= 0) {
+            return parts[0];
+        }
+        const integerPart = parts[0];
+        let decimalPart = parts[1] || '';
+        decimalPart = decimalPart.padEnd(afterDecimal, '0');
+        decimalPart = decimalPart.substring(0, afterDecimal);
+        return `${integerPart}.${decimalPart}`;
     };
+    
+
+    // const parseAndTruncate = (amount, afterDeciaml) => {
+    //     const multiplier = Math.pow(10, afterDeciaml);
+    //     const truncatedAmount = Math.floor(amount * multiplier) / multiplier;
+    //     return truncatedAmount;
+    // };
 
     const handleIsTxOnChain = async (value) => {
         console.log("New Transaction On Chain, Reload Data")
