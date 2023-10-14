@@ -1671,7 +1671,7 @@ const Staking = ({
             }}>
             <StakingCard
                 fatherTokenName={"JNY"}
-                sonTokenName={"1020"}
+                sonTokenName={"X1020"}
                 language={language}
                 contract={contract}
                 defaultAccount={defaultAccount}
@@ -1709,7 +1709,7 @@ const Staking = ({
             />
             <StakingCard
                 fatherTokenName={"JNY"}
-                sonTokenName={"1020"}
+                sonTokenName={"X1020"}
                 language={language}
                 contract={contract2}
                 defaultAccount={defaultAccount}
