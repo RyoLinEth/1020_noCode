@@ -1889,7 +1889,8 @@ const About = () => {
         // stakingCA: '0x410e2968f2CDC049ed5E2622Ed8CE9a3064CD9Fe',        //Test
         stakingCA2: '0x9E0D2393068921a8C46469A1d9F0504F2DFCbcf8',
         JNYCA: '0x1E83D06E17CAE34415BeA30116aC755456131020',
-        _1020CA: '0x606261Dd5C435f4628bb557EC8CF3b5a0B131020',
+        _1020CA: '0x8aA98bdbC4BF7E6A65aBBb19244b850f0cB32024',
+        // X1020CA: '0x8aA98bdbC4BF7E6A65aBBb19244b850f0cB32024',
 
         lpStakingCA: '0x25dA6086b943393b79746869832414d32Ef5aDe4',
         _1020LPCA: '0x7f41f3EA8D269B535353C912b3871a83236cB8B0',
@@ -1924,6 +1925,7 @@ const About = () => {
                     _1020LPCA={CAs._1020LPCA}
                     pointCA={CAs.PointCA}
                     stakingCA3={CAs.stakingCA3}
+                    X1020CA={CAs.x}
                 />
 
                 <Marquee
