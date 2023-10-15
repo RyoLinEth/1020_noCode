@@ -669,7 +669,8 @@ const StakingCard = ({
         const judgeAreaOpen = () => {
             const currentTimestamp = Math.floor(Date.now() / 1000)
 
-            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
+            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(true);
+            // if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
             else setIsAreaOpenJudge(true)
         }
         judgeAreaOpen();
@@ -1365,7 +1366,8 @@ const Staking = ({
     _1020CA,
     _1020LPCA,
     pointCA,
-    stakingCA3
+    stakingCA3,
+    X1020CA,
 }) => {
 
     const [provider, setProvider] = useState(null);
@@ -1387,12 +1389,16 @@ const Staking = ({
     const [_1020LPContract, set1020LPContract] = useState(null);
     const [pointContract, setPointContract] = useState(null);
 
+    const [_x1020Contract, setX1020Contract] = useState(null);
+
     const [jnyDecimals, setJNYDecimals] = useState(null);
     const [jnyBalance, setJNYBalance] = useState(null);
     const [jnyStaked, setJNYStaked] = useState(null);
 
     const [_1020deicmals, set1020Decimals] = useState(null);
     const [earned1020, setEarned1020] = useState(null);
+
+    const [_X1020deicmals, setX1020Decimals] = useState(null);
 
     const [_1020LPDecimals, set1020LPDecimals] = useState(null);
     const [_1020LPBalance, set1020LPBalance] = useState(null);
@@ -1417,7 +1423,7 @@ const Staking = ({
     //  Contract3
     const [contract3, setContract3] = useState(null);
     const [contract3Staked, setContract3Staked] = useState(null);
-    const [contract3Earned1020, setContract3Earned1020] = useState(null);
+    const [contract3Earned1020, setContract3EarnedX1020] = useState(null);
     const [contract3StartBlock, setContract3StartBlock] = useState(null);
     const [contract3EndBlock, setContract3EndBlock] = useState(null);
     const [contract3Claimed1020, setContract3Claimed1020] = useState(null);
@@ -1431,6 +1437,7 @@ const Staking = ({
     const CA_1020 = _1020CA
     const LP_1020 = _1020LPCA
     const PointCA = pointCA
+    const CA_X1020 = X1020CA
 
     const parseAndTruncate = (amount, afterDecimal) => {
         const parts = String(amount).split('.');
@@ -1507,9 +1514,9 @@ const Staking = ({
         const formattedStakedBalance_3 = ethers.utils.formatUnits(`${tempStakedJNY_3}`, jnyDecimals);
         setContract3Staked(parseAndTruncate(formattedStakedBalance_3, 2));
 
-        const tempGained1020_3 = await contract3.pendingReward(defaultAccount);
-        const formattedGained1020_3 = ethers.utils.formatUnits(`${tempGained1020_3}`, _1020deicmals);
-        setContract3Earned1020(parseAndTruncate(formattedGained1020_3, 5));
+        const tempGainedX1020 = await contract3.pendingReward(defaultAccount);
+        const formattedGainedX1020 = ethers.utils.formatUnits(`${tempGainedX1020}`, _X1020deicmals);
+        setContract3EarnedX1020(parseAndTruncate(formattedGainedX1020, 5));
     }
 
     const updateEthers = async () => {
@@ -1528,9 +1535,7 @@ const Staking = ({
             const tempContract2 = new ethers.Contract(stakingCA2, StakingABI, tempSigner)
             setContract2(tempContract2);
 
-            const tempContract3 = new ethers.Contract(stakingCA3, StakingABI, tempSigner)
-            setContract3(tempContract3);
-
+            console.log(1)
 
             const tempContractStartBlock = await tempContract.startBlock();
             const formattedContractStartBlock = ethers.utils.formatUnits(`${tempContractStartBlock}`, 0);
@@ -1544,9 +1549,7 @@ const Staking = ({
             const formattedContractStartBlock_2 = ethers.utils.formatUnits(`${tempContractStartBlock_2}`, 0);
             setContract2StartBlock(formattedContractStartBlock_2)
 
-            const tempContractStartBlock_3 = await tempContract3.startBlock();
-            const formattedContractStartBlock_3 = ethers.utils.formatUnits(`${tempContractStartBlock_3}`, 0);
-            setContract3StartBlock(formattedContractStartBlock_3)
+            console.log(2)
 
             //  代幣資料
             const tempJNYContract = new ethers.Contract(JNYCA, TokenABI, tempSigner)
@@ -1557,8 +1560,12 @@ const Staking = ({
             set1020LPContract(temp1020LPContract);
             const tempPointContract = new ethers.Contract(PointCA, TokenABI, tempSigner)
             setPointContract(tempPointContract);
+            
+            console.log(3)
+
 
             //  代幣精度
+            
             const tempDecimalJNY = await tempJNYContract.decimals();
             setJNYDecimals(tempDecimalJNY);
             const tempDecimal1020 = await temp1020Contract.decimals();
@@ -1568,6 +1575,8 @@ const Staking = ({
             const tempDecimalPoint = await tempPointContract.decimals();
             setPointDecimals(tempDecimalPoint);
 
+
+            console.log(4)
             //  質押 JNY 獲得 1020 資料
 
             //  持有JNY
@@ -1585,10 +1594,10 @@ const Staking = ({
             const formattedGained1020 = ethers.utils.formatUnits(`${tempGained1020}`, tempDecimal1020);
             setEarned1020(parseAndTruncate(formattedGained1020, 5));
 
+
             //  質押 1020LP 獲得 Points 資料
 
             //  持有 1020LP
-            // const testAddresss = "0x04322E3b3EE8ae0Ae85f6336Dc2D8f44A4567866";
             const temp1020LPBalance = await temp1020LPContract.balanceOf(defaultAccount);
             const formatted1020LPBalance = ethers.utils.formatUnits(`${temp1020LPBalance}`, tempDecimal1020LP);
             set1020LPBalance(parseAndTruncate(formatted1020LPBalance, 9))
@@ -1615,6 +1624,7 @@ const Staking = ({
             const tempContractEndBlock_2 = await tempContract2.bonusEndBlock();
             const formattedContractEndBlock_2 = ethers.utils.formatUnits(`${tempContractEndBlock_2}`, 0);
             setContract2EndBlock(formattedContractEndBlock_2)
+            
 
             //  已領取的 1020 數量
             const tempUserId = await tempContract._usersId(defaultAccount)
@@ -1628,6 +1638,7 @@ const Staking = ({
             const formattedStakedBalance2 = ethers.utils.formatUnits(`${tempStakedJNY2}`, tempDecimalJNY);
             setContract2Staked(parseAndTruncate(formattedStakedBalance2, 2));
 
+            
             const tempGained1020_2 = await tempContract2.pendingReward(defaultAccount);
             const formattedGained1020_2 = ethers.utils.formatUnits(`${tempGained1020_2}`, tempDecimal1020);
             setContract2Earned1020(parseAndTruncate(formattedGained1020_2, 5));
@@ -1635,17 +1646,36 @@ const Staking = ({
             const tempUserId_2 = await tempContract2._usersId(defaultAccount)
             tryGetUserById(tempUserId_2, tempContract2, setContract2Claimed1020, tempDecimal1020);
 
+            //  X1020
+            
+            const tempContract3 = new ethers.Contract(stakingCA3, StakingABI, tempSigner)
+            setContract3(tempContract3);
+
+            const tempContractStartBlock_3 = await tempContract3.startBlock();
+            const formattedContractStartBlock_3 = ethers.utils.formatUnits(`${tempContractStartBlock_3}`, 0);
+            setContract3StartBlock(formattedContractStartBlock_3)
+
+            const tempContractEndBlock_3 = await tempContract3.bonusEndBlock();
+            const formattedContractEndBlock_3 = ethers.utils.formatUnits(`${tempContractEndBlock_3}`, 0);
+            setContract3EndBlock(formattedContractEndBlock_3)
+
+            const tempX1020Contract = new ethers.Contract(CA_X1020, TokenABI, tempSigner)
+            setX1020Contract(tempX1020Contract);
+
+            const tempDecimalX1020 = await tempX1020Contract.decimals();
+            setX1020Decimals(tempDecimalX1020);
+            
+            //  可提領的X1020
+            const tempGainedX1020 = await tempContract3.pendingReward(defaultAccount);
+            const formattedGainedX1020 = ethers.utils.formatUnits(`${tempGainedX1020}`, tempDecimalX1020);
+            setContract3EarnedX1020(parseAndTruncate(formattedGainedX1020, 5));
             
             const tempStakedJNY3 = await tempContract3.getUserTotalAmount(defaultAccount);
             const formattedStakedBalance3 = ethers.utils.formatUnits(`${tempStakedJNY3}`, tempDecimalJNY);
             setContract3Staked(parseAndTruncate(formattedStakedBalance3, 2));
 
-            const tempGained1020_3 = await tempContract3.pendingReward(defaultAccount);
-            const formattedGained1020_3 = ethers.utils.formatUnits(`${tempGained1020_3}`, tempDecimal1020);
-            setContract3Earned1020(parseAndTruncate(formattedGained1020_3, 5));
-
             const tempUserId_3 = await tempContract3._usersId(defaultAccount)
-            tryGetUserById(tempUserId_3, tempContract3, setContract3Claimed1020, tempDecimal1020);
+            tryGetUserById(tempUserId_3, tempContract3, setContract3Claimed1020, tempDecimalX1020);
         } catch (err) {
             console.log(err)
         }
@@ -1671,7 +1701,7 @@ const Staking = ({
             }}>
             <StakingCard
                 fatherTokenName={"JNY"}
-                sonTokenName={"X1020"}
+                sonTokenName={"1020"}
                 language={language}
                 contract={contract}
                 defaultAccount={defaultAccount}
@@ -1709,7 +1739,7 @@ const Staking = ({
             />
             <StakingCard
                 fatherTokenName={"JNY"}
-                sonTokenName={"X1020"}
+                sonTokenName={"1020"}
                 language={language}
                 contract={contract2}
                 defaultAccount={defaultAccount}
@@ -1728,7 +1758,7 @@ const Staking = ({
             />
             <StakingCard
                 fatherTokenName={"JNY"}
-                sonTokenName={"1020"}
+                sonTokenName={"X1020"}
                 language={language}
                 contract={contract3}
                 defaultAccount={defaultAccount}
@@ -1889,14 +1919,14 @@ const About = () => {
         // stakingCA: '0x410e2968f2CDC049ed5E2622Ed8CE9a3064CD9Fe',        //Test
         stakingCA2: '0x9E0D2393068921a8C46469A1d9F0504F2DFCbcf8',
         JNYCA: '0x1E83D06E17CAE34415BeA30116aC755456131020',
-        _1020CA: '0x8aA98bdbC4BF7E6A65aBBb19244b850f0cB32024',
-        // X1020CA: '0x8aA98bdbC4BF7E6A65aBBb19244b850f0cB32024',
+        _1020CA: '0x606261Dd5C435f4628bb557EC8CF3b5a0B131020',
+        X1020CA: '0x8aA98bdbC4BF7E6A65aBBb19244b850f0cB32024',
 
-        lpStakingCA: '0x25dA6086b943393b79746869832414d32Ef5aDe4',
-        _1020LPCA: '0x7f41f3EA8D269B535353C912b3871a83236cB8B0',
+        // lpStakingCA: '0x25dA6086b943393b79746869832414d32Ef5aDe4',  //Moto
+        lpStakingCA: '0xC3F60887319b97a3bdE64B4c7E6E9FbDC2a07171',  //  New
+        _1020LPCA: '0x7f41f3EA8D269B535353C912b3871a83236cB8B0',    //  New
         // _1020LPCA: '0x42B9E132569Cb3FA1B3af0a52D5Cac5d98A9eC44', // Moto
-        PointCA: '0xC3F60887319b97a3bdE64B4c7E6E9FbDC2a07171',      //
-        // PointCA: '0x1c65D4A15e943f4fd2DaE158D8c3E9fD0f7EbfE0',   // Moto
+        PointCA: '0x1c65D4A15e943f4fd2DaE158D8c3E9fD0f7EbfE0',
 
         stakingCA3:'0x1031Cd792842b72F0a1d3111D048c2cAbD311727',
     }
@@ -1925,7 +1955,7 @@ const About = () => {
                     _1020LPCA={CAs._1020LPCA}
                     pointCA={CAs.PointCA}
                     stakingCA3={CAs.stakingCA3}
-                    X1020CA={CAs.x}
+                    X1020CA={CAs.X1020CA}
                 />
 
                 <Marquee
