@@ -669,8 +669,8 @@ const StakingCard = ({
         const judgeAreaOpen = () => {
             const currentTimestamp = Math.floor(Date.now() / 1000)
 
-            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(true);
-            // if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
+            // if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(true);
+            if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
             else setIsAreaOpenJudge(true)
         }
         judgeAreaOpen();
