@@ -1699,7 +1699,7 @@ const Staking = ({
                 justifyContent: 'space-evenly',
                 padding: '20px',
             }}>
-            <StakingCard
+            {/* <StakingCard
                 fatherTokenName={"JNY"}
                 sonTokenName={"1020"}
                 language={language}
@@ -1717,7 +1717,7 @@ const Staking = ({
                 startBlock={contractStartBlock}
                 bonusEndBlock={contractEndBlock}
                 hasBeenClaimdReward={hasBeenClaimdReward}
-            />
+            /> */}
             <StakingCard
                 fatherTokenName={"1020LP"}
                 sonTokenName={stakingContract3SonTokenName}
@@ -1737,7 +1737,7 @@ const Staking = ({
                 bonusEndBlock={lpContractEndBlock}
                 hasBeenClaimdReward={pointHasBeenClaimedReward}
             />
-            <StakingCard
+            {/* <StakingCard
                 fatherTokenName={"JNY"}
                 sonTokenName={"1020"}
                 language={language}
@@ -1755,7 +1755,7 @@ const Staking = ({
                 startBlock={contract2StartBlock}
                 bonusEndBlock={contract2EndBlock}
                 hasBeenClaimdReward={contract2Claimed1020}
-            />
+            /> */}
             <StakingCard
                 fatherTokenName={"JNY"}
                 sonTokenName={"X1020"}
