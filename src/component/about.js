@@ -1,6 +1,6 @@
 import Logo from '../img/1020/1020_Word.png'
 import Logo2 from '../img/1020/1020.jpg'
-import Logo3 from '../img/1020/1020_noBG_4.png'
+import Logo3 from '../img/1020/X1020.png'
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import StakingABI from '../abi/stakingABI.json'
