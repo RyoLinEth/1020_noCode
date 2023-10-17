@@ -326,7 +326,7 @@ const Content1 = ({ language }) => {
                                 <h1 style={{
                                     color: '#A017D7', fontWeight: 'bolder'
                                 }}>
-                                    1020 DApp<br />
+                                    X1020 DApp<br />
                                     {
                                         language === "EN"
                                             ? " Staking Center"
@@ -346,7 +346,7 @@ const Content1 = ({ language }) => {
                                     {
                                         language === "EN"
                                             ? "The staking Dapp exclusively for 1020 has arrived."
-                                            : "專屬於 1020 的質押 Dapp 來了"
+                                            : "專屬於 X1020 的質押 Dapp 來了"
                                     }
                                 </p>
                                 <p style={{
@@ -364,15 +364,15 @@ const Content1 = ({ language }) => {
                                     1.
                                     {
                                         language === "EN"
-                                            ? "Earn 1020 from staking JNY."
-                                            : "JNY 獲取 1020 收益"
+                                            ? "Earn X1020 from staking JNY."
+                                            : "JNY 獲取 X1020 收益"
                                     }
                                     <br />
                                     2.
                                     {
                                         language === "EN"
-                                            ? "Earn gem energy from staking 1020 LP."
-                                            : "1020LP 獲取 寶石能量值獎勵"
+                                            ? "Earn gem energy from staking X1020 LP."
+                                            : "X1020LP 獲取 寶石能量值獎勵"
                                     }
                                 </p>
                             </div>
@@ -482,7 +482,7 @@ const Content2 = ({ language, _1020CA }) => {
                         wordBreak: 'break-all',
                         padding: '20px',
                     }}>
-                        1020
+                        X1020
                         {
                             language === "EN"
                                 ? " CA : "
@@ -519,8 +519,8 @@ const Content2 = ({ language, _1020CA }) => {
                         }}>
                             {
                                 language === "EN"
-                                    ? "Buy 1020 On PancakeSwap"
-                                    : "在 PancakeSwap 購買 1020"
+                                    ? "Buy X1020 On PancakeSwap"
+                                    : "在 PancakeSwap 購買 X1020"
                             }
                         </button>
                     </a>
@@ -670,6 +670,10 @@ const StakingCard = ({
             const currentTimestamp = Math.floor(Date.now() / 1000)
 
             // if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(true);
+            if (Phase == 2) {
+                setIsAreaOpenJudge(false)
+                return;
+            }
             if (+currentTimestamp < +startBlock) setIsAreaOpenJudge(false);
             else setIsAreaOpenJudge(true)
         }
@@ -863,13 +867,13 @@ const StakingCard = ({
                         backgroundColor: 'white',
                         borderRadius: '20px'
                     }}>
-                        <h3 style={{ textAlign: 'center' }}>
+                        {/* <h3 style={{ textAlign: 'center' }}>
                             {
                                 language === "EN"
                                     ? `Phase ${Phase}`
                                     : `第 ${Phase} 期`
                             }
-                        </h3>
+                        </h3> */}
                         <div>
                             <h4 style={{ textAlign: 'center' }}>
 
@@ -1021,13 +1025,13 @@ const StakingCard = ({
                         backgroundColor: 'white',
                         borderRadius: '20px'
                     }}>
-                        <h3 style={{ textAlign: 'center' }}>
+                        {/* <h3 style={{ textAlign: 'center' }}>
                             {
                                 language === "EN"
                                     ? `Phase ${Phase}`
                                     : `第 ${Phase} 期`
                             }
-                        </h3>
+                        </h3> */}
                         <div>
                             <h4 style={{ textAlign: 'center' }}>
 
@@ -1719,8 +1723,27 @@ const Staking = ({
                 hasBeenClaimdReward={hasBeenClaimdReward}
             /> */}
             <StakingCard
-                fatherTokenName={"1020LP"}
-                sonTokenName={stakingContract3SonTokenName}
+                fatherTokenName={"JNY"}
+                sonTokenName={"X1020"}
+                language={language}
+                contract={contract3}
+                defaultAccount={defaultAccount}
+                fatherContract={jnyContract}
+                provider={provider}
+                fatherDecimals={jnyDecimals}
+                fatherBalance={jnyBalance}
+                fatherStaked={contract3Staked}
+                sonGained={contract3Earned1020}
+                isSuccess={handleIsTxOnChain}
+                isAreaOpen={false}
+                Phase={4}
+                startBlock={contract3StartBlock}
+                bonusEndBlock={contract3EndBlock}
+                hasBeenClaimdReward={contract3Claimed1020}
+            />
+            <StakingCard
+                fatherTokenName={"X1020LP"}
+                sonTokenName={"X1020"}
                 language={language}
                 contract={lpStakingContract}
                 defaultAccount={defaultAccount}
@@ -1756,25 +1779,6 @@ const Staking = ({
                 bonusEndBlock={contract2EndBlock}
                 hasBeenClaimdReward={contract2Claimed1020}
             /> */}
-            <StakingCard
-                fatherTokenName={"JNY"}
-                sonTokenName={"X1020"}
-                language={language}
-                contract={contract3}
-                defaultAccount={defaultAccount}
-                fatherContract={jnyContract}
-                provider={provider}
-                fatherDecimals={jnyDecimals}
-                fatherBalance={jnyBalance}
-                fatherStaked={contract3Staked}
-                sonGained={contract3Earned1020}
-                isSuccess={handleIsTxOnChain}
-                isAreaOpen={false}
-                Phase={4}
-                startBlock={contract3StartBlock}
-                bonusEndBlock={contract3EndBlock}
-                hasBeenClaimdReward={contract3Claimed1020}
-            />
         </section>
     )
 }
@@ -1939,7 +1943,7 @@ const About = () => {
             <div data-elementor-type="wp-page" data-elementor-id={177} className="elementor elementor-177">
                 <Hero language={language} />
                 <Content1 language={language} />
-                <Content2 language={language} _1020CA={CAs._1020CA} />
+                <Content2 language={language} _1020CA={CAs.X1020CA} />
 
                 <Marquee
                     content={stakingCenterText}
